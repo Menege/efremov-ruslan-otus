@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS дерево объекта</title>
+    <style>
+      ul {
+        list-style-type: none;
+      }
+
+      li {
+        border-left: 2px solid grey;
+        border-bottom: 2px solid grey;
+        width: 10px;
+        display: block;
+        padding-left: calc(2* 1.5rem - 10px - 2px); 
+      }
+    </style>
+  </head>
+  <body>
+    <div id="tree">
+    </div>
+
+    <script>
+      const tree =(obj) => {
+        let ulFresh = null;
+        
+        const createDeepTree = (obj) => {
+            if (!ulFresh) {
+                ulFresh = document.createElement('ul');
+                document.getElementById('tree').appendChild(ulFresh);
+            }
+            let li = document.createElement('li');
+            li.innerHTML = obj.name;
+            ulFresh.appendChild(li);
+
+            if (typeof obj.items === 'object') {
+                let childrenUl = document.createElement('ul');
+                li.after(childrenUl);
+                for (const item of obj.items) {
+                  ulFresh = childrenUl
+                    createDeepTree(item);
+                }
+            }
+        }
+
+        createDeepTree(obj)
+      }
+
+      const obj = {
+        name: 1,
+        items: [
+          {
+            name: 2,
+            items: [
+              { name: 3 }, { name: 4 }
+            ]}, 
+            {
+            name: 5,
+            items: [{ name: 6 }]
+            }
+      ]
+      };
+      tree(obj);
+    </script>
+</html>
