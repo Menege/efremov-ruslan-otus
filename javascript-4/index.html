@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="text" id="primary">Summary</div>
+    </div>
+  </body>
+</html>
+
+<script>
+  const getPath = () => {
+    arrValues = [];
+    console.log(document.querySelectorAll("*"));
+    document.querySelectorAll("*").forEach((item) => {
+      if (
+        item.localName !== "html" &&
+        item.localName !== "head" &&
+        item.localName !== "meta" &&
+        item.localName !== "title" &&
+        item.localName !== "body"
+      ) {
+        let isUnique = false
+        for (const el of item.classList) {
+          if (document.querySelectorAll(`.${el}`).length === 1) {
+            arrValues.push(item);
+            isUnique = true
+          }
+        }
+        if (item.id && document.querySelectorAll(`#${item.id}`).length === 1) {
+          arrValues.push(item);
+          isUnique = true
+        }
+        if (!isUnique && item.classList.length === 0 && !item.id) {
+          const parent = item.parentElement;
+          const children = Array.from(parent.children);
+          const index = children.indexOf(item) + 1;
+
+          arrValues.push(`${item.localName}:nth-child(${index})`);
+        }
+      }
+    });
+
+    return arrValues.length ? arrValues[0] : "Не найдено";
+  };
+  console.log(getPath());
+</script>
