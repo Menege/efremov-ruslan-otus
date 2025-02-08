@@ -1,0 +1,12 @@
+{
+  "files": [],
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "types": ["node"],
+    "target": "ESNext"
+  },
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}

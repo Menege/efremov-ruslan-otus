@@ -1,0 +1,34 @@
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="title">Название задачи</label>
+      <input id="title" formControlName="title" class="form-control" required />
+    </div>
+  
+    <div class="form-group">
+      <label for="description">Описание</label>
+      <textarea id="description" formControlName="description" class="form-control" required></textarea>
+    </div>
+  
+    <div class="form-group">
+      <label for="inputExample">Пример ввода</label>
+      <textarea id="inputExample" formControlName="inputExample" class="form-control" required></textarea>
+    </div>
+  
+    <div class="form-group">
+      <label for="outputExample">Пример вывода</label>
+      <textarea id="outputExample" formControlName="outputExample" class="form-control" required></textarea>
+    </div>
+  
+    <div class="form-group">
+      <label for="difficulty">Уровень сложности</label>
+      <select id="difficulty" formControlName="difficulty" class="form-control">
+        <option value="easy">Простой</option>
+        <option value="medium">Средний</option>
+        <option value="hard">Сложный</option>
+      </select>
+    </div>
+  
+    <button type="submit" class="btn btn-primary" [disabled]="!taskForm.valid">Сохранить</button>
+    <button type="button" class="btn btn-secondary" (click)="taskForm.reset()">Отмена</button>
+  </form>
+  

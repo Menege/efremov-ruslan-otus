@@ -36,9 +36,12 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install root dependencies and Lerna
+        run: |
+          npm install
+          npx lerna bootstrap
 
+      # Backend setup and tests
       - name: Wait for PostgreSQL
         run: |
           until pg_isready --host=localhost --port=5432 --username=postgres; do
@@ -50,11 +53,22 @@ jobs:
         run: npx prisma migrate deploy
         env:
           DATABASE_URL: postgres://postgres:1@localhost:5432/leetcode
+        working-directory: ./services/server
 
-      - name: Run Tests
+      - name: Run Backend Tests
         run: npm run test
         env:
           DATABASE_URL: postgres://postgres:1@localhost:5432/leetcode
+        working-directory: ./services/server
+
+      # Frontend setup and build
+      - name: Install frontend dependencies
+        run: npm install
+        working-directory: ./services/lk-vue
+
+      - name: Build frontend
+        run: npm run build
+        working-directory: ./services/lk-vue
 
   deploy:
     runs-on: ubuntu-latest

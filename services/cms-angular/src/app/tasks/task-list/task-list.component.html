@@ -1,0 +1,23 @@
+<h2>Список задач</h2>
+<table class="table" *ngIf="tasks$ | async as tasks; else loading">
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th>Сложность</th>
+      <th>Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let task of tasks">
+      <td>{{ task.title }}</td>
+      <td>{{ task.difficulty }}</td>
+      <td>
+        <a [routerLink]="['/tasks/edit', task.id]" class="btn btn-sm btn-primary">Редактировать</a>
+        <button (click)="deleteTask(task.id)" class="btn btn-sm btn-danger">Удалить</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<ng-template #loading>
+  <p>Загрузка задач...</p>
+</ng-template>

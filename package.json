@@ -4,32 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.ts",
-    "start:dev": "ts-node src/index.ts",
-    "dev": "nodemon --watch src --exec ts-node src/index.ts",
-    "build": "tsc",
-    "start:prod": "node dist/index.js",
-    "test": "mocha"
+    "instalization": "npx lerna bootstrap",
+    "dev": "npx lerna run dev",
+    "build": "npx lerna run build"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-  "@fastify/jwt": "^5.0.1",
- "@fastify/postgres": "^5.2.2",
-  "@fastify/static": "^6.9.0",
-  "@fastify/swagger": "^8.14.3",
-  "@fastify/swagger-ui": "^4.1.1",
-  "@prisma/client": "^5.19.1",
-  "fastify": "^4.28.1",
-  "fastify-plugin": "^4.5.1"
-},
-"devDependencies": {
-  "@types/node": "^18.17.19",
-  "chai": "^4.3.7",
-  "mocha": "^10.2.0",
-  "nodemon": "^3.1.4",
-  "ts-node": "^10.9.2",
-  "typescript": "^5.6.2"
-}
-
+  "private": true,
+  "workspaces": [
+    "services/*"
+  ],
+  "devDependencies": {
+    "lerna": "^8.1.8"
+  }
 }

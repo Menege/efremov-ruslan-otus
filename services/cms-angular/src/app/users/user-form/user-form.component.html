@@ -1,0 +1,14 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="role">Роль пользователя</label>
+      <select id="role" formControlName="role" class="form-control" required>
+        <option value="admin">Администратор</option>
+        <option value="user">Пользователь</option>
+        <option value="moderator">Модератор</option>
+      </select>
+    </div>
+  
+    <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Сохранить</button>
+    <button type="button" class="btn btn-secondary" (click)="userForm.reset()">Отмена</button>
+  </form>
+  
